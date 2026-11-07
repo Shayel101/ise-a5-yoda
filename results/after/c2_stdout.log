@@ -1,0 +1,18 @@
+nan_W3                       PASS         NaN/non-finite output
+posinf_W4                    PASS         NaN/non-finite output
+neginf_G                     PASS         NaN/non-finite output
+missing_value_H              PASS         NaN/non-finite output
+missing_column_W1            PASS         NaN/non-finite output
+W3_mag_99                    PASS         NaN/non-finite output
+G_mag_minus50                PASS         NaN/non-finite output
+rHa_colour_50                PASS         NaN/non-finite output
+Gvar_negative                PASS         NaN/non-finite output
+column_order_J_W4_swapped    PASS         NaN/non-finite output
+dtype_text_in_mag            PASS         raised ValueError: Unable to parse string "bright" at position 0
+empty_input                  PASS         raised ValueError: guard: empty input
+single_row                   PASS         finite probabilities
+duplicate_source_id          PASS         NaN/non-finite output
+gaia_id_roundtrip            PASS         NaN/non-finite output
+bootgather_original_ids      PASS         
+original YODA.py returncode: 1 | ["ModuleNotFoundError: No module named 'keras_metrics'"]
+DONE

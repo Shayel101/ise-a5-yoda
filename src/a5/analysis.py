@@ -161,3 +161,24 @@ def counterexamples(run: dict, name: str, sample: pd.DataFrame, max_rows: int = 
         r.update({c: X[j, k] for k, c in enumerate(BASE13)})
         rows.append(r)
     return pd.DataFrame(rows), len(flipped)
+
+
+def flip_decomposition(run: dict, set_: str = "cand") -> pd.DataFrame:
+    """Split each cell's flips of clean PMS/CBe sources into (i) rejections by the guard (faulted class -1)
+    and (ii) real class changes to another class."""
+    names = cell_names(run["cfg"])
+    rows = []
+    for name in names:
+        r = {"cell": name}
+        for c in [1, 2]:
+            n = rej = chg = 0
+            for s in run["cfg"]["model_seeds"]:
+                c0 = npz(run, s, names[0])[f"{set_}_cls"]
+                c1 = npz(run, s, name)[f"{set_}_cls"]
+                m = c0 == c
+                n += int(m.sum()); rej += int((c1[m] == -1).sum()); chg += int(((c1[m] != c) & (c1[m] != -1)).sum())
+            r[f"{CLS[c]}_n"] = n
+            r[f"{CLS[c]}_rejected"] = rej / n if n else np.nan
+            r[f"{CLS[c]}_changed_class"] = chg / n if n else np.nan
+        rows.append(r)
+    return pd.DataFrame(rows)

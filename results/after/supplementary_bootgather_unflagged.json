@@ -1,0 +1,24 @@
+{
+ "returncode": 0,
+ "stderr_tail": "",
+ "n_sources_in": 999,
+ "n_sources_out": 999,
+ "n_ids_altered": 790,
+ "examples_altered": [
+  "2.0333676425912735e+18",
+  "4.0592873909066414e+18",
+  "4.2934166453284413e+18",
+  "4.065686312447027e+18",
+  "3.0453675893910467e+18",
+  "4.0601575512790656e+18",
+  "1.9720906225928333e+18",
+  "5.96369503266868e+18",
+  "4.256547958888116e+18",
+  "5.862692726322185e+18"
+ ],
+ "max_abs_error_mean_pPMS": 5.551115123125783e-17,
+ "n_iterations_averaged_note": "v0 has no header but Bootgather skips its first line (next(csvreader0)), so 1 source loses iteration 0",
+ "verdict": "FAIL-silent",
+ "note": "SUPPLEMENTARY diagnostic, not a protocol_v1 cell. Same 1000 random IDs as the C2 case, restricted to rows the guard did not flag.",
+ "n_flagged_excluded": 1
+}

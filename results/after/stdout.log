@@ -1,0 +1,62 @@
+SoSt rows=4150983  labelled in SoSt=187 (PMS=120, CBe=67, otype={'TT*': 102, 'Be*': 67, 'Ae*': 18}), conflicting IDs dropped=0
+[seed 11] trained: epochs=121 ncomp=12 180s
+[seed 11] c00_clean_0.0 done in 1.5s
+[seed 11] c01_F1_resample_0.1 done in 1.3s
+[seed 11] c02_F1_resample_0.28 done in 1.2s
+[seed 11] c03_F1_resample_0.44 done in 1.3s
+[seed 11] c04_F1_resample_0.72 done in 1.3s
+[seed 11] c05_F1_noise_0.1 done in 1.3s
+[seed 11] c06_F1_noise_0.28 done in 1.3s
+[seed 11] c07_F1_noise_0.44 done in 1.2s
+[seed 11] c08_F1_noise_0.72 done in 1.1s
+[seed 11] c09_F2_allwise_swap_0.01 done in 1.0s
+[seed 11] c10_F2_allwise_swap_0.023 done in 1.0s
+[seed 11] c11_F2_allwise_swap_0.05 done in 1.0s
+[seed 11] c12_F3_iphas_swap_0.013 done in 1.0s
+[seed 11] c13_F3_iphas_swap_0.03 done in 1.0s
+[seed 11] c14_F4_fluxerr_0.05_k2.0 done in 1.0s
+[seed 11] c15_F4_fluxerr_0.1_k2.0 done in 1.0s
+[seed 11] c16_F4_fluxerr_0.05_k5.0 done in 1.2s
+[seed 11] c17_F4_fluxerr_0.1_k5.0 done in 1.1s
+[seed 22] trained: epochs=91 ncomp=12 110s
+[seed 22] c00_clean_0.0 done in 1.0s
+[seed 22] c01_F1_resample_0.1 done in 1.0s
+[seed 22] c02_F1_resample_0.28 done in 1.0s
+[seed 22] c03_F1_resample_0.44 done in 1.0s
+[seed 22] c04_F1_resample_0.72 done in 1.0s
+[seed 22] c05_F1_noise_0.1 done in 0.9s
+[seed 22] c06_F1_noise_0.28 done in 1.0s
+[seed 22] c07_F1_noise_0.44 done in 1.0s
+[seed 22] c08_F1_noise_0.72 done in 1.0s
+[seed 22] c09_F2_allwise_swap_0.01 done in 1.0s
+[seed 22] c10_F2_allwise_swap_0.023 done in 1.0s
+[seed 22] c11_F2_allwise_swap_0.05 done in 1.0s
+[seed 22] c12_F3_iphas_swap_0.013 done in 1.0s
+[seed 22] c13_F3_iphas_swap_0.03 done in 1.0s
+[seed 22] c14_F4_fluxerr_0.05_k2.0 done in 1.0s
+[seed 22] c15_F4_fluxerr_0.1_k2.0 done in 1.0s
+[seed 22] c16_F4_fluxerr_0.05_k5.0 done in 1.0s
+[seed 22] c17_F4_fluxerr_0.1_k5.0 done in 1.0s
+[seed 33] trained: epochs=158 ncomp=12 186s
+[seed 33] c00_clean_0.0 done in 1.0s
+[seed 33] c01_F1_resample_0.1 done in 1.0s
+[seed 33] c02_F1_resample_0.28 done in 1.0s
+[seed 33] c03_F1_resample_0.44 done in 1.0s
+[seed 33] c04_F1_resample_0.72 done in 1.0s
+[seed 33] c05_F1_noise_0.1 done in 1.0s
+[seed 33] c06_F1_noise_0.28 done in 1.0s
+[seed 33] c07_F1_noise_0.44 done in 1.0s
+[seed 33] c08_F1_noise_0.72 done in 1.0s
+[seed 33] c09_F2_allwise_swap_0.01 done in 1.0s
+[seed 33] c10_F2_allwise_swap_0.023 done in 1.0s
+[seed 33] c11_F2_allwise_swap_0.05 done in 1.0s
+[seed 33] c12_F3_iphas_swap_0.013 done in 1.0s
+[seed 33] c13_F3_iphas_swap_0.03 done in 1.0s
+[seed 33] c14_F4_fluxerr_0.05_k2.0 done in 1.0s
+[seed 33] c15_F4_fluxerr_0.1_k2.0 done in 1.0s
+[seed 33] c16_F4_fluxerr_0.05_k5.0 done in 1.0s
+[seed 33] c17_F4_fluxerr_0.1_k5.0 done in 1.0s
+total wall time 555s
+real 558.98
+user 2908.60
+sys 1157.49

@@ -143,6 +143,19 @@ else:
     print('C2 after improvement:', 'FALSIFIED' if (t2a.verdict == 'FAIL-silent').any() else 'SURVIVED')
     curves(ta, 'After improvement')
 """)
+md("""### 8b. Decomposing flips: guard rejections vs real class changes
+Under the frozen oracle, a source the guard rejects (class 'undefined') counts as a flip. The table
+separates rejections from changes to another class.""")
+code("""
+if after is not None:
+    rc_cells = [n for n, c in zip(names, base['cfg']['cells']) if any(c['fault'] == r['fault'] and np.isclose(c['rate'], r['rate']) for r in base['cfg']['realistic'])]
+    for lab, run in [('baseline', base), ('after', after)]:
+        fd = A.flip_decomposition(run); print(lab); display(fd[fd.cell.isin(rc_cells)].round(4))
+    sup = json.loads((ROOT / 'results/after/supplementary_bootgather_unflagged.json').read_text())
+    print('SUPPLEMENTARY (not a protocol cell): original Bootgather.py on the', sup['n_sources_in'],
+          'unflagged rows after the improvement ->', sup['n_ids_altered'], 'IDs silently altered. The protocol-cell PASS after the improvement',
+          'is a crash caused by the guard NaN output (returncode', after['c2']['bootgather']['returncode'], ').')
+""")
 md("## 9. Side effects of the improvement")
 code("""
 if after is not None:

@@ -1,0 +1,152 @@
+{
+ "config": "after",
+ "model_seed": 11,
+ "original_sha256": {
+  "YODA.py": "e826ee9c35981e7b171bbe9d14d289d85394d3fd4e9d93e2042fadbc103747d7",
+  "Bootgather.py": "1972431434534fb7793e86e83be29626c1bd10efd67a818b23245e8625eee807"
+ },
+ "cases": [
+  {
+   "case": "nan_W3",
+   "kind": "non-finite",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "posinf_W4",
+   "kind": "non-finite",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "neginf_G",
+   "kind": "non-finite",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "missing_value_H",
+   "kind": "missing band (empty field)",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "missing_column_W1",
+   "kind": "missing band (column absent)",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "W3_mag_99",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "G_mag_minus50",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "rHa_colour_50",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "Gvar_negative",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "column_order_J_W4_swapped",
+   "kind": "wrong column order",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "verdict": "PASS"
+  },
+  {
+   "case": "dtype_text_in_mag",
+   "kind": "wrong dtype",
+   "valid_input": false,
+   "outcome": "raised ValueError: Unable to parse string \"bright\" at position 0",
+   "traceback": "ha/Desktop/ise-a5-yoda/src/a5/guard.py\", line 79, in guarded_inference\n    x = df.iloc[:, 3:16].apply(pd.to_numeric, errors=\"raise\").to_numpy(dtype=float)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/pandas/core/frame.py\", line 10374, in apply\n    return op.apply().__finalize__(self, method=\"apply\")\n           ^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/pandas/core/apply.py\", line 916, in apply\n    return self.apply_standard()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/pandas/core/apply.py\", line 1063, in apply_standard\n    results, res_index = self.apply_series_generator()\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/pandas/core/apply.py\", line 1081, in apply_series_generator\n    results[i] = self.func(v, *self.args, **self.kwargs)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/pandas/core/tools/numeric.py\", line 232, in to_numeric\n    values, new_mask = lib.maybe_convert_numeric(  # type: ignore[call-overload]\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"lib.pyx\", line 2433, in pandas._libs.lib.maybe_convert_numeric\nValueError: Unable to parse string \"bright\" at position 0\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "empty_input",
+   "kind": "empty input",
+   "valid_input": false,
+   "outcome": "raised ValueError: guard: empty input",
+   "traceback": "Traceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 103, in case\n    out = inference(f_in, f_out, predict)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/run_boundary.py\", line 43, in inference\n    df = guarded_inference(f_in, f_out, model, guard)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/guard.py\", line 77, in guarded_inference\n    raise ValueError(\"guard: empty input\")\nValueError: guard: empty input\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "single_row",
+   "kind": "single row (valid)",
+   "valid_input": true,
+   "n_out": 1,
+   "outcome": "finite probabilities",
+   "equals_batch": true,
+   "verdict": "PASS"
+  },
+  {
+   "case": "duplicate_source_id",
+   "kind": "duplicate IDs",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "NaN/non-finite output",
+   "note": "duplicate ID returned twice with different probabilities, no flag",
+   "verdict": "PASS"
+  },
+  {
+   "case": "gaia_id_roundtrip",
+   "kind": "identifier integrity (YODA.py loadtxt/savetxt)",
+   "valid_input": false,
+   "n_out": 1000,
+   "outcome": "NaN/non-finite output",
+   "n_ids": 1000,
+   "n_altered": 0,
+   "examples": [],
+   "verdict": "PASS"
+  }
+ ],
+ "bootgather": {
+  "returncode": 1,
+  "stderr_tail": "Traceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/results/c2_work/after/bootgather/Bootgather.py\", line 198, in <module>\n    prob_other.append(float(row[4]))\n                      ^^^^^^^^^^^^^\nValueError: could not convert string to float: ''\n",
+  "n_sources_in": 1000,
+  "n_sources_out": 0,
+  "n_ids_altered": 0,
+  "examples_altered": [],
+  "max_abs_error_mean_pPMS": null,
+  "n_iterations_averaged_note": "v0 has no header but Bootgather skips its first line (next(csvreader0)), so 1 source loses iteration 0",
+  "verdict": "PASS",
+  "case": "bootgather_original_ids",
+  "kind": "identifier integrity (original Bootgather.py, unmodified)"
+ },
+ "original_yoda_py_run": {
+  "returncode": 1,
+  "stderr_tail": "2026-11-07 13:22:01.069156: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.\nTo enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.\nTraceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/results/c2_work/after/yoda_script/YODA.py\", line 14, in <module>\n    import keras_metrics as km\nModuleNotFoundError: No module named 'keras_metrics'\n"
+ }
+}

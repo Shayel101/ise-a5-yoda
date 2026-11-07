@@ -1,0 +1,4 @@
+seed,jaccard_PMS,spearman_PMS,n_repro_PMS,n_published_PMS,jaccard_CBe,spearman_CBe,n_repro_CBe,n_published_CBe,cand_published_PMS_recovered,cand_published_CBe_recovered
+11,0.0,,154,0,0.0,,187,0,0.4086812144212524,0.9322533136966127
+22,0.0,,645,0,0.0,,94,0,0.6900723520341596,0.9308823529411765
+33,0.0,,755,0,0.0,,257,0,0.791172282866635,0.9546120058565154
