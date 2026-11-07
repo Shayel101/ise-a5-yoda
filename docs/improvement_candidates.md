@@ -3,7 +3,7 @@
 ## Baseline failures that motivate them
 1. **C1 falsified, F1-resample at 44 %:**
    - PMS flip rate 10.5 % [10.0, 11.0];
-   - CBe flip rate 9.5 % [8.8, …];
+   - CBe flip rate 9.5 % [8.8, 10.2];
    - ΔRecall_PMS −8.9 pp [−17.8, −2.2].
    
    The other realistic cells pass. The F1-noise and F2/F3 flips stay below 5 %.
