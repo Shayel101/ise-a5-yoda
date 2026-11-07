@@ -1,0 +1,26 @@
+# DOI resolution check via https://doi.org/api/handles/ (2026-11-07T04:39:09Z); responseCode 1 = DOI exists
+10.1051/0004-6361/202037731 -> 1 https://www.aanda.org/10.1051/0004-6361/202037731
+10.26093/cds/vizier.36380021 -> 1 https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/638/A21
+10.1051/0004-6361/201832870 -> 1 https://www.aanda.org/10.1051/0004-6361/201832870
+10.1088/0004-637X/791/2/131 -> 1 https://iopscience.iop.org/article/10.1088/0004-637X/791/2/131
+10.1093/mnras/stz1301 -> 1 https://academic.oup.com/mnras/article/487/2/2522/5489195
+10.1051/aas:2000332 -> 1 http://aas.aanda.org/10.1051/aas:2000332
+10.1051/0004-6361/201833051 -> 1 https://www.aanda.org/10.1051/0004-6361/201833051
+10.1093/mnras/stu1651 -> 1 http://academic.oup.com/mnras/article/444/4/3230/2910611/The-second-data-release-of-the-INT-Photometric-Hα
+10.1093/mnras/stu394 -> 1 https://academic.oup.com/mnras/article-lookup/doi/10.1093/mnras/stu394
+10.48550/arXiv.1412.6980 -> 1 https://arxiv.org/abs/1412.6980
+10.1007/978-1-4899-4541-9 -> 1 http://link.springer.com/10.1007/978-1-4899-4541-9
+10.48550/arXiv.2005.01727 -> 1 https://arxiv.org/abs/2005.01727
+10.26131/IRSA1 -> 1 https://cosmos.ipac.caltech.edu/dois/doi.php?id=10.26131/IRSA1
+
+# Metadata check (CSL-JSON via content negotiation): first author, year, title
+10.1051/0004-6361/202037731 | Vioque 2020 | Catalogue of new Herbig Ae/Be and classical Be stars
+10.1051/0004-6361/201832870 | Vioque 2018 | <i>Gaia</i>DR2 study of Herbig Ae/Be stars
+10.1088/0004-637X/791/2/131 | Koenig 2014 | A CLASSIFICATION SCHEME FOR YOUNG STELLAR OBJECTS USING THE<i>WIDE-FIELD INFRARED SURVEY E
+10.1093/mnras/stz1301 | Marton 2019 | Identification of Young Stellar Object candidates in the Gaia DR2 x AllWISE catalogue with
+10.1051/aas:2000332 | Wenger 2000 | The SIMBAD astronomical database
+10.1051/0004-6361/201833051 | ? 2018 | <i>Gaia</i>
+                    Data Release 2
+10.1093/mnras/stu1651 | Barentsen 2014 | The second data release of the INT Photometric Hα Survey of the Northern Galactic Plane (I
+10.1093/mnras/stu394 | Drew 2014 | The VST Photometric H  Survey of the Southern Galactic Plane and Bulge (VPHAS+)
+10.1007/978-1-4899-4541-9 | Efron 1993 | An Introduction to the Bootstrap
