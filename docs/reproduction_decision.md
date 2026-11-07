@@ -43,3 +43,30 @@ Fallback (C-b, only if C-a fails its gate): a surrogate trained on SoSt with the
 3. There is no input validation anywhere. NaN, inf, empty input and wrong column order all flow straight into the scaler, PCA and ANN (C2-relevant).
 4. `Bootgather.py` parses `source_id` with `float()`. Gaia DR2 IDs exceed 2^53, so they are silently corrupted. For example, 5781891918842753664 becomes 5781891918842754048. All 20 sampled published IDs do exist in DR2, so the published catalogue looks unaffected, but this check is limited.
 5. The 2-layer network in the code puts Dropout before BatchNorm, after each hidden layer. The paper text says BN comes "after every layer". We follow the code.
+
+## Revision 1 (2026-11-07, before any experiment): quick-mode label route and training budget
+
+The user asked for a quick, same-day study. Two findings also forced changes:
+
+- **Observables.** IPHAS DR2 (II/321) and VPHAS+ (II/341) return no rows from the reachable mirrors
+  (CfA, IDIA). CDS Strasbourg is unreachable from this network. So the r and Hα of external labelled
+  stars cannot be fetched. Plan C-a step 2 was **dropped**.
+- **Labels.** These come from SIMBAD (CfA mirror, live database, retrieved 2026-11-07, 7,957 rows):
+  - otype `Ae*` (Herbig Ae/Be, 177) and `TT*` (T Tauri, 5,664) are labelled PMS (1);
+  - otype `Be*` (2,116) is labelled CBe (2).
+  
+  Only labelled stars **already present in the published SoSt table** are used. Their 13 base
+  observables, including Gvar and Vhtg, are therefore exactly the paper's own values, and no
+  Gvar/Vhtg recalibration is needed. Because the paper's own labelled sources appear to have been
+  removed from the published table, this labelled set is largely **disjoint** from the authors'. It
+  consists of objects classified in SIMBAD but not used for training in 2019/2020. This is a
+  deviation, and it is stated as a limitation.
+- **Training budget.** A benchmark of the faithful network takes 26 s per full-batch epoch with the
+  paper's 470,263 "other" sources on this CPU (i7-9750H). The quick mode therefore uses:
+  - "other" = 47,026 random SoSt sources (1/10 of the paper's size);
+  - max 300 epochs, with early-stopping patience 50 as in the paper;
+  - **3 seeds = 3 bootstrap models** (paper: 30).
+  
+  A smaller "other" class is known to raise recall and lower precision (paper Fig. 2), so absolute
+  metrics are not comparable with 78.8%. The C1 oracles are **paired deltas** against the same-seed
+  clean run, so they remain well-defined.
