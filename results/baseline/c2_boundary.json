@@ -1,0 +1,203 @@
+{
+ "config": "baseline",
+ "model_seed": 11,
+ "original_sha256": {
+  "YODA.py": "e826ee9c35981e7b171bbe9d14d289d85394d3fd4e9d93e2042fadbc103747d7",
+  "Bootgather.py": "1972431434534fb7793e86e83be29626c1bd10efd67a818b23245e8625eee807"
+ },
+ "cases": [
+  {
+   "case": "nan_W3",
+   "kind": "non-finite",
+   "valid_input": false,
+   "outcome": "raised ValueError: Input X contains NaN.\nPCA does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradi",
+   "traceback": "ackages/sklearn/decomposition/_base.py\", line 143, in transform\n    X = self._validate_data(\n        ^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/base.py\", line 633, in _validate_data\n    out = check_array(X, input_name=\"X\", **check_params)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 1064, in check_array\n    _assert_all_finite(\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 123, in _assert_all_finite\n    _assert_all_finite_element_wise(\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 172, in _assert_all_finite_element_wise\n    raise ValueError(msg_err)\nValueError: Input X contains NaN.\nPCA does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "posinf_W4",
+   "kind": "non-finite",
+   "valid_input": false,
+   "outcome": "raised ValueError: Input X contains infinity or a value too large for dtype('float64').",
+   "traceback": "s(x13).astype(\"float32\")\n        ^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/pipeline.py\", line 85, in features\n    return self.pca.transform(self.scaler.transform(expand_48(x13)))\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/_set_output.py\", line 316, in wrapped\n    data_to_wrap = f(self, X, *args, **kwargs)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/preprocessing/_data.py\", line 1045, in transform\n    X = self._validate_data(\n        ^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/base.py\", line 633, in _validate_data\n    out = check_array(X, input_name=\"X\", **check_params)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 1064, in check_array\n    _assert_all_finite(\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 123, in _assert_all_finite\n    _assert_all_finite_element_wise(\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 172, in _assert_all_finite_element_wise\n    raise ValueError(msg_err)\nValueError: Input X contains infinity or a value too large for dtype('float64').\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "neginf_G",
+   "kind": "non-finite",
+   "valid_input": false,
+   "outcome": "raised ValueError: Input X contains infinity or a value too large for dtype('float64').",
+   "traceback": "s(x13).astype(\"float32\")\n        ^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/pipeline.py\", line 85, in features\n    return self.pca.transform(self.scaler.transform(expand_48(x13)))\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/_set_output.py\", line 316, in wrapped\n    data_to_wrap = f(self, X, *args, **kwargs)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/preprocessing/_data.py\", line 1045, in transform\n    X = self._validate_data(\n        ^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/base.py\", line 633, in _validate_data\n    out = check_array(X, input_name=\"X\", **check_params)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 1064, in check_array\n    _assert_all_finite(\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 123, in _assert_all_finite\n    _assert_all_finite_element_wise(\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 172, in _assert_all_finite_element_wise\n    raise ValueError(msg_err)\nValueError: Input X contains infinity or a value too large for dtype('float64').\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "missing_value_H",
+   "kind": "missing band (empty field)",
+   "valid_input": false,
+   "outcome": "raised ValueError: could not convert string '' to float64 at row 0, column 12.",
+   "traceback": "Traceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 89, in case\n    out = yoda_inference(f_in, f_out, predict)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 51, in yoda_inference\n    Input_set = np.loadtxt(open(csv_in), delimiter=\",\", skiprows=1,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/numpy/lib/npyio.py\", line 1373, in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/numpy/lib/npyio.py\", line 1016, in _read\n    arr = _load_from_filelike(\n          ^^^^^^^^^^^^^^^^^^^^\nValueError: could not convert string '' to float64 at row 0, column 12.\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "missing_column_W1",
+   "kind": "missing band (column absent)",
+   "valid_input": false,
+   "outcome": "raised ValueError: invalid column index 17 at row 1 with 17 columns",
+   "traceback": "Traceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 89, in case\n    out = yoda_inference(f_in, f_out, predict)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 51, in yoda_inference\n    Input_set = np.loadtxt(open(csv_in), delimiter=\",\", skiprows=1,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/numpy/lib/npyio.py\", line 1373, in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/numpy/lib/npyio.py\", line 1016, in _read\n    arr = _load_from_filelike(\n          ^^^^^^^^^^^^^^^^^^^^\nValueError: invalid column index 17 at row 1 with 17 columns\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "W3_mag_99",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "finite probabilities",
+   "verdict": "FAIL-silent"
+  },
+  {
+   "case": "G_mag_minus50",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "finite probabilities",
+   "verdict": "FAIL-silent"
+  },
+  {
+   "case": "rHa_colour_50",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "finite probabilities",
+   "verdict": "FAIL-silent"
+  },
+  {
+   "case": "Gvar_negative",
+   "kind": "out-of-range value",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "finite probabilities",
+   "verdict": "FAIL-silent"
+  },
+  {
+   "case": "column_order_J_W4_swapped",
+   "kind": "wrong column order",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "finite probabilities",
+   "verdict": "FAIL-silent"
+  },
+  {
+   "case": "dtype_text_in_mag",
+   "kind": "wrong dtype",
+   "valid_input": false,
+   "outcome": "raised ValueError: could not convert string 'bright' to float64 at row 0, column 9.",
+   "traceback": "ValueError: could not convert string to float: 'bright'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 89, in case\n    out = yoda_inference(f_in, f_out, predict)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 51, in yoda_inference\n    Input_set = np.loadtxt(open(csv_in), delimiter=\",\", skiprows=1,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/numpy/lib/npyio.py\", line 1373, in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/numpy/lib/npyio.py\", line 1016, in _read\n    arr = _load_from_filelike(\n          ^^^^^^^^^^^^^^^^^^^^\nValueError: could not convert string 'bright' to float64 at row 0, column 9.\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "empty_input",
+   "kind": "empty input",
+   "valid_input": false,
+   "outcome": "raised ValueError: Found array with 0 sample(s) (shape=(0, 48)) while a minimum of 1 is required by StandardScaler.",
+   "traceback": "predict)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 54, in yoda_inference\n    Final_classes = predict(x_sample)\n                    ^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/pipeline.py\", line 134, in predict_proba\n    f = self.features(x13).astype(\"float32\")\n        ^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/pipeline.py\", line 85, in features\n    return self.pca.transform(self.scaler.transform(expand_48(x13)))\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/_set_output.py\", line 316, in wrapped\n    data_to_wrap = f(self, X, *args, **kwargs)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/preprocessing/_data.py\", line 1045, in transform\n    X = self._validate_data(\n        ^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/base.py\", line 633, in _validate_data\n    out = check_array(X, input_name=\"X\", **check_params)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py\", line 1087, in check_array\n    raise ValueError(\nValueError: Found array with 0 sample(s) (shape=(0, 48)) while a minimum of 1 is required by StandardScaler.\n",
+   "verdict": "PASS"
+  },
+  {
+   "case": "single_row",
+   "kind": "single row (valid)",
+   "valid_input": true,
+   "outcome": "raised IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed",
+   "traceback": "Traceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 89, in case\n    out = yoda_inference(f_in, f_out, predict)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/sha/Desktop/ise-a5-yoda/src/a5/boundary.py\", line 53, in yoda_inference\n    x_sample = Input_set[:, [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]]\n               ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nIndexError: too many indices for array: array is 1-dimensional, but 2 were indexed\n",
+   "verdict": "FAIL-crash"
+  },
+  {
+   "case": "duplicate_source_id",
+   "kind": "duplicate IDs",
+   "valid_input": false,
+   "n_out": 5,
+   "outcome": "finite probabilities",
+   "note": "duplicate ID returned twice with different probabilities, no flag",
+   "verdict": "FAIL-silent"
+  },
+  {
+   "case": "gaia_id_roundtrip",
+   "kind": "identifier integrity (YODA.py loadtxt/savetxt)",
+   "valid_input": false,
+   "n_out": 1000,
+   "outcome": "finite probabilities",
+   "n_ids": 1000,
+   "n_altered": 636,
+   "examples": [
+    [
+     "4293416645328442624",
+     "4293416645328442368"
+    ],
+    [
+     "4065686312447027072",
+     "4065686312447027200"
+    ],
+    [
+     "3045367589391046400",
+     "3045367589391046656"
+    ],
+    [
+     "4060157551279066240",
+     "4060157551279066112"
+    ],
+    [
+     "1972090622592833664",
+     "1972090622592833536"
+    ],
+    [
+     "5963695032668679680",
+     "5963695032668680192"
+    ],
+    [
+     "4256547958888115840",
+     "4256547958888115712"
+    ],
+    [
+     "5862692726322186112",
+     "5862692726322186240"
+    ],
+    [
+     "5960343304567292672",
+     "5960343304567292928"
+    ],
+    [
+     "5350478053302548608",
+     "5350478053302548480"
+    ]
+   ],
+   "verdict": "FAIL-silent"
+  }
+ ],
+ "bootgather": {
+  "returncode": 0,
+  "stderr_tail": "",
+  "n_sources_in": 1000,
+  "n_sources_out": 1000,
+  "n_ids_altered": 791,
+  "examples_altered": [
+   "2.0333676425912735e+18",
+   "4.0592873909066414e+18",
+   "4.2934166453284413e+18",
+   "4.065686312447027e+18",
+   "3.0453675893910467e+18",
+   "4.0601575512790656e+18",
+   "1.9720906225928333e+18",
+   "5.96369503266868e+18",
+   "4.256547958888116e+18",
+   "5.862692726322185e+18"
+  ],
+  "max_abs_error_mean_pPMS": 1.1102230246251565e-16,
+  "n_iterations_averaged_note": "v0 has no header but Bootgather skips its first line (next(csvreader0)), so 1 source loses iteration 0",
+  "verdict": "FAIL-silent",
+  "case": "bootgather_original_ids",
+  "kind": "identifier integrity (original Bootgather.py, unmodified)"
+ },
+ "original_yoda_py_run": {
+  "returncode": 1,
+  "stderr_tail": "2026-11-07 13:03:48.577457: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.\nTo enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.\nTraceback (most recent call last):\n  File \"/Users/sha/Desktop/ise-a5-yoda/results/c2_work/baseline/yoda_script/YODA.py\", line 14, in <module>\n    import keras_metrics as km\nModuleNotFoundError: No module named 'keras_metrics'\n"
+ }
+}

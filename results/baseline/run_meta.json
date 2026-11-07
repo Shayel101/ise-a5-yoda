@@ -1,0 +1,127 @@
+{
+ "config": {
+  "name": "baseline",
+  "out_dir": "results/baseline",
+  "guard": false,
+  "model_seeds": [
+   11,
+   22,
+   33
+  ],
+  "n_other": 47026,
+  "max_epochs": 300,
+  "patience": 50,
+  "n_rand": 100000,
+  "n_boot": 2000,
+  "w34_noise_sigma": 1.0,
+  "cells": [
+   {
+    "fault": "clean",
+    "rate": 0.0
+   },
+   {
+    "fault": "F1_resample",
+    "rate": 0.1
+   },
+   {
+    "fault": "F1_resample",
+    "rate": 0.28
+   },
+   {
+    "fault": "F1_resample",
+    "rate": 0.44
+   },
+   {
+    "fault": "F1_resample",
+    "rate": 0.72
+   },
+   {
+    "fault": "F1_noise",
+    "rate": 0.1
+   },
+   {
+    "fault": "F1_noise",
+    "rate": 0.28
+   },
+   {
+    "fault": "F1_noise",
+    "rate": 0.44
+   },
+   {
+    "fault": "F1_noise",
+    "rate": 0.72
+   },
+   {
+    "fault": "F2_allwise_swap",
+    "rate": 0.01
+   },
+   {
+    "fault": "F2_allwise_swap",
+    "rate": 0.023
+   },
+   {
+    "fault": "F2_allwise_swap",
+    "rate": 0.05
+   },
+   {
+    "fault": "F3_iphas_swap",
+    "rate": 0.013
+   },
+   {
+    "fault": "F3_iphas_swap",
+    "rate": 0.03
+   },
+   {
+    "fault": "F4_fluxerr",
+    "rate": 0.05,
+    "k": 2.0
+   },
+   {
+    "fault": "F4_fluxerr",
+    "rate": 0.1,
+    "k": 2.0
+   },
+   {
+    "fault": "F4_fluxerr",
+    "rate": 0.05,
+    "k": 5.0
+   },
+   {
+    "fault": "F4_fluxerr",
+    "rate": 0.1,
+    "k": 5.0
+   }
+  ],
+  "realistic": [
+   {
+    "fault": "F1_resample",
+    "rate": 0.44
+   },
+   {
+    "fault": "F1_noise",
+    "rate": 0.44
+   },
+   {
+    "fault": "F2_allwise_swap",
+    "rate": 0.023
+   },
+   {
+    "fault": "F3_iphas_swap",
+    "rate": 0.013
+   }
+  ],
+  "thresholds": {
+   "flip_rate": 0.05,
+   "delta_recall_pp": 2.8
+  }
+ },
+ "wall_seconds": 646.5,
+ "n_labelled_in_sost": 187,
+ "labelled_by_otype": {
+  "TT*": 102,
+  "Be*": 67,
+  "Ae*": 18
+ },
+ "n_conflicting_ids": 0,
+ "n_cand_ids": 10472
+}

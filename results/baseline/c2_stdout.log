@@ -1,0 +1,18 @@
+nan_W3                       PASS         raised ValueError: Input X contains NaN.
+PCA does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradi
+posinf_W4                    PASS         raised ValueError: Input X contains infinity or a value too large for dtype('float64').
+neginf_G                     PASS         raised ValueError: Input X contains infinity or a value too large for dtype('float64').
+missing_value_H              PASS         raised ValueError: could not convert string '' to float64 at row 0, column 12.
+missing_column_W1            PASS         raised ValueError: invalid column index 17 at row 1 with 17 columns
+W3_mag_99                    FAIL-silent  finite probabilities
+G_mag_minus50                FAIL-silent  finite probabilities
+rHa_colour_50                FAIL-silent  finite probabilities
+Gvar_negative                FAIL-silent  finite probabilities
+column_order_J_W4_swapped    FAIL-silent  finite probabilities
+dtype_text_in_mag            PASS         raised ValueError: could not convert string 'bright' to float64 at row 0, column 9.
+empty_input                  PASS         raised ValueError: Found array with 0 sample(s) (shape=(0, 48)) while a minimum of 1 is required by StandardScaler.
+single_row                   FAIL-crash   raised IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed
+duplicate_source_id          FAIL-silent  finite probabilities
+gaia_id_roundtrip            FAIL-silent  finite probabilities
+bootgather_original_ids      FAIL-silent  
+original YODA.py returncode: 1 | ["ModuleNotFoundError: No module named 'keras_metrics'"]
