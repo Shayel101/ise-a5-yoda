@@ -73,6 +73,8 @@ seeds and measured on the full table minus training sources:
 Clean test-set PMS recall is 74.9 % and precision 37.9 %. The precision is a lower limit (paper
 Appx. B.1). With only 14–15 PMS stars per test split, these metrics are coarse.
 
+![Route C reproduction compared with the published catalogue: candidate counts per seed (left, log scale; black bars mark the published counts) and agreement metrics (right).](figures/agreement.png)
+
 # 3. Threat and fault model
 
 All faults are pure, seeded functions applied to the 13 base characteristics before scaling and PCA,
@@ -97,6 +99,8 @@ Out of scope:
 
 The 28 % figure was verified only through the citing paper. The primary source was not accessible to
 automated retrieval.
+
+![YODA pipeline as re-implemented, with the point where each fault class is injected and where the guard (improvement A) sits.](figures/diagram_pipeline.png)
 
 # 4. Frozen protocol
 
@@ -131,6 +135,10 @@ A pre-freeze smoke run on partial data is disclosed in `results/pilot_smoke/`. O
 turned out to be ill-posed: the agreement Jaccard on E_rand is trivially 0, because E_rand excludes all
 candidates. It was recomputed on the full table and logged; no decision depends on it.
 
+![Experimental design of protocol_v1.](figures/diagram_experiment.png)
+
+![Study workflow: phases, git tags and the student's decision points.](figures/diagram_workflow.png)
+
 # 5. Baseline results
 
 All 57 evaluations completed on the first attempt (647 s, no crashes, no reruns).
@@ -153,6 +161,10 @@ Across all faults the response is monotonic:
 - **F4:** inflating Gaia flux errors mainly moves CBe candidates (2.7 % at k = 5, 10 %), consistent
   with the variability features driving CBe identification.
 
+![Paired change in PMS test-set recall (95 % bootstrap CI). The grey band is ±2.8 pp.](figures/delta_recall.png)
+
+![Class transitions of published candidates at the paper-realistic rates (baseline; 3 seeds pooled; row percentages).](figures/transitions.png)
+
 **Every flipped source was an injected one.** Under a fixed seed, faults never changed an untouched
 source's class.
 
@@ -170,6 +182,8 @@ NaN, ±inf, empty fields, a missing column, text in a magnitude and empty input 
 counts as PASS. Those errors come from NumPy and scikit-learn rather than from the pipeline's own
 design. A single *valid* row crashes the inference step (1-D indexing). This is FAIL-crash: a defect,
 but not a C2 falsifier.
+
+![C2 verdict per malformed-input case, before and after the guard. The hatched cell is a nominal PASS.](figures/c2_matrix.png)
 
 # 6. Improvement and rejected candidates
 
@@ -228,6 +242,8 @@ produce colour combinations outside the training range. But the protocol counts 
 and at least 7.5 % of PMS candidates still change class silently. ΔRecall is unchanged, because no
 labelled test PMS star was rejected.
 
+![Flips split into silent class changes and guard rejections for the realistic cells (B = baseline, A = after).](figures/flip_decomposition.png)
+
 # 8. Counterexamples and negative results
 
 Concrete counterexamples come from model seed 11 (all listed in the notebook):
@@ -239,6 +255,8 @@ Concrete counterexamples come from model seed 11 (all listed in the notebook):
 - **Gaia DR2 431891813829408768**, CBe: p(CBe) falls from 0.57 to 0.23 under the same AllWISE fault.
 
 In the F1-resample 44 % cell, 1,011 published candidates flip for this seed alone.
+
+![Observed photometry (solid) and faulted photometry (dashed) for three counterexamples.](figures/counterexamples.png)
 
 Negative results, which did *not* falsify:
 
@@ -261,6 +279,8 @@ fails for spurious mid-IR photometry at the reported rate.
 - **Runtime:** the grid ran in 555 s against 647 s for the baseline (the difference is within
   training-time noise).
 - **Downstream:** the guard's NaN outputs break the original averaging script.
+
+![False rejections of valid sources by the guard on clean data.](figures/side_effects.png)
 
 **Limits:**
 
