@@ -41,11 +41,14 @@ def build_sets(sample: pd.DataFrame, labels: pd.DataFrame, cand_ids: np.ndarray)
     return labelled, conflict
 
 
-def make_predict(model: YodaModel, guard: bool):
+def make_predict(model: YodaModel, guard: bool, x13_train: np.ndarray, out: Path, seed: int):
     if not guard:
         return model.predict_proba
-    from .guard import guarded_predict  # improvement (Phase 5)
-    return lambda x: guarded_predict(model, x)
+    from .guard import Guard, guarded_predict  # improvement A (Phase 5)
+    g = Guard.fit(x13_train)
+    with open(out / "models" / f"seed_{seed}_guard.pkl", "wb") as fh:
+        pickle.dump(g, fh)
+    return lambda x: guarded_predict(model, x, g)
 
 
 def apply_fault(cell: dict, x: np.ndarray, seed: int, rand_x: np.ndarray, sigma: float):
@@ -114,7 +117,7 @@ def main(cfg_path: str) -> None:
         for k, v in sets.items():
             np.save(out / "ids" / f"{s}_{k}.npy", v.GaiaDR2.to_numpy())
         y_test = test.label.to_numpy()
-        predict = make_predict(model, cfg.get("guard", False))
+        predict = make_predict(model, cfg.get("guard", False), base13(train), out, s)
 
         clean_p = {k: predict(X[k]) for k in sets}
         clean_c = {k: classify(p) for k, p in clean_p.items()}

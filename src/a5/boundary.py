@@ -68,14 +68,28 @@ def _row(gid: int, x13: np.ndarray) -> list:
     return [gid, 10.0, 60.0] + [repr(float(v)) for v in x13] + [0, 0]
 
 
+def _first_column_ids(path: Path) -> list[int]:
+    """Read column 0 exactly (Decimal), whether written as float text by YODA.py or as int by the guard."""
+    from decimal import Decimal
+    out = []
+    for line in open(path):
+        tok = line.split(",")[0].strip()
+        try:
+            out.append(int(Decimal(tok)))
+        except Exception:
+            continue  # header line
+    return out
+
+
 def run_cases(predict, valid_rows: np.ndarray, valid_ids: np.ndarray, workdir: Path,
-              id_rows: np.ndarray, id_ids: np.ndarray) -> list[dict]:
+              id_rows: np.ndarray, id_ids: np.ndarray, inference=None) -> list[dict]:
     """``valid_rows``: (5, 13) clean SoSt rows; ``valid_ids``: their exact Gaia DR2 IDs.
     ``id_rows``/``id_ids``: a larger random SoSt sample for the identifier round-trip case."""
     workdir.mkdir(parents=True, exist_ok=True)
     x = np.asarray(valid_rows[:5], float)
     ids = [int(v) for v in valid_ids[:5]]
     ref = predict(x)  # batch reference
+    inference = inference or yoda_inference
     cases = []
 
     def case(name, kind, rows=None, raw_text=None, valid=False, check=None):
@@ -86,7 +100,7 @@ def run_cases(predict, valid_rows: np.ndarray, valid_ids: np.ndarray, workdir: P
             _write(f_in, rows)
         rec = {"case": name, "kind": kind, "valid_input": valid}
         try:
-            out = yoda_inference(f_in, f_out, predict)
+            out = inference(f_in, f_out, predict)
             probs = out[:, -3:] if out.ndim == 2 else np.empty((0, 3))
             finite = bool(np.isfinite(probs).all()) and probs.size > 0
             rec["n_out"] = int(len(probs))
@@ -147,8 +161,7 @@ def run_cases(predict, valid_rows: np.ndarray, valid_ids: np.ndarray, workdir: P
     # 14 identifier integrity: 19-digit Gaia DR2 IDs through YODA.py's loadtxt/savetxt
     big_ids = [int(v) for v in id_ids]
     def chk_ids(out, probs):
-        back = np.loadtxt(workdir / "gaia_id_roundtrip_out.csv", delimiter=",")[:, 0]
-        got = [int(v) for v in back]
+        got = _first_column_ids(workdir / "gaia_id_roundtrip_out.csv")
         altered = [(str(a), str(b)) for a, b in zip(big_ids, got) if a != b]
         return {"n_ids": len(big_ids), "n_altered": len(altered), "examples": altered[:10],
                 "verdict_override": "FAIL-silent" if altered else "PASS"}

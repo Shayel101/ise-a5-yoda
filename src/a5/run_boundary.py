@@ -33,9 +33,15 @@ def main(cfg_path: str) -> None:
     out = ROOT / cfg["out_dir"]
     seed = cfg["model_seeds"][0]
     model = load_model(out, seed)
-    if cfg.get("guard", False):
-        from .guard import guarded_predict
-        predict = lambda x: guarded_predict(model, x)  # noqa: E731
+    inference = None
+    if cfg.get("guard", False):  # improvement A
+        from .guard import guarded_inference, guarded_predict
+        guard = pickle.load(open(out / "models" / f"seed_{seed}_guard.pkl", "rb"))
+        predict = lambda x: guarded_predict(model, x, guard)  # noqa: E731
+
+        def inference(f_in, f_out, _predict):
+            df = guarded_inference(f_in, f_out, model, guard)
+            return df.drop(columns="guard_flag").to_numpy(dtype=float)
     else:
         predict = model.predict_proba
     sample = load_sample()
@@ -45,7 +51,8 @@ def main(cfg_path: str) -> None:
     orig = ROOT / "data" / "external" / "yoda_original"
     hashes = B.fetch_original(orig)
     big = sample.sample(n=1000, random_state=0)  # identifier-integrity cases: 1000 random SoSt rows
-    cases = B.run_cases(predict, base13(rows), rows.GaiaDR2.to_numpy(), work, base13(big), big.GaiaDR2.to_numpy())
+    cases = B.run_cases(predict, base13(rows), rows.GaiaDR2.to_numpy(), work, base13(big), big.GaiaDR2.to_numpy(),
+                        inference=inference)
     p = predict(base13(big))
     boot = B.run_bootgather(orig, work / "bootgather", [int(v) for v in big.GaiaDR2], p)
     boot["case"] = "bootgather_original_ids"

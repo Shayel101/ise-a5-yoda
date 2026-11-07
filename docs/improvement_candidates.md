@@ -31,4 +31,17 @@ Its effect can be measured honestly with the identical protocol.
 **B** is the only realistic candidate for C1. However, it trains on a synthetic fault close to the one
 tested, so any improvement it shows is partly circular.
 
-**The student chooses.** Rejected candidates and the reasons will be recorded here after the choice.
+## Decision (student, 2026-11-07): **A**
+Rejected candidates and the reasons:
+- **B:** it would have targeted the C1 failure, but it trains on a synthetic fault close to the tested
+  one (circular evidence) and needs retraining. Not chosen. It remains the main recommendation for
+  C1 (see residual_risk.md).
+- **C:** the effect cannot be measured with this protocol, because the faults do not alter AllWISE flags.
+- **D:** it does not change the argmax at p ≥ 0.5, so no failure would be addressed.
+- **E:** a likely large loss of clean PMS/CBe separation (paper Sect. 5.4).
+
+Implementation: `src/a5/guard.py`, wired in with the `guard: true` switch (`configs/after.yaml`).
+- It does **not** modify the original `Bootgather.py`, which stays out of scope. Its ID corruption
+  therefore remains in the after run and is a residual risk.
+- Guard parameters were fixed before the after run: range = [0.01, 99.99] percentile of each model's
+  training observables ± 1.0, as stated in candidate A.
