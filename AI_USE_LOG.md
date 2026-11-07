@@ -29,7 +29,11 @@ executed the phases and stopped at the student's decision points.
 | Quick mode (student request "use quick mode, finish today"): 3 models, 1/10 "other" class, 300-epoch cap | accepted, initiated by the student | Benchmark: 26 s/epoch at full size |
 | Initial plan C-a: rebuild labelled observables from Gaia + AllWISE + IPHAS/VPHAS+ | **rejected** (by the AI, before freezing; reported to the student) | The IPHAS/VPHAS+ tables returned no rows from any reachable mirror, and the student wanted the quick mode. Replaced with SIMBAD-labelled stars already in the SoSt. |
 | Fallback C-b: surrogate trained on published labels | **rejected** / not needed | C-a-lite was feasible, and C-b would make recall meaningless |
-| (later phases are appended below) | | |
+| The improvement: A (guard), recommended over B because it is cheap, reviewable and measurable; B is circular | accepted (student chose "A") | Student decision |
+| Score the guard's NaN outputs as flips under the frozen oracle, even though that made C1 look worse after the improvement | accepted (the AI did not change the oracle after seeing results) | The protocol was frozen. The decomposition into rejections and class changes is added as extra analysis only |
+| Bootgather "PASS" after the guard: report it as nominal and add a clearly labelled supplementary run that shows the IDs are still corrupted | accepted | Avoids a misleading PASS |
+| Recompute the ill-posed agreement Jaccard on the full table | accepted, logged in `results/baseline/rerun_log.md` | It is a reporting metric only; no decision depends on it |
+| Install pandoc through the pinned dev dependency `pypandoc-binary==1.15` (lock file updated after `a5-env`) | accepted | No system pandoc was available. The change affects only report rendering, not the experiment environment |
 
 ## Independent verification of AI outputs
 Each check produced a stored artefact or a reproducible command.
@@ -54,7 +58,17 @@ Each check produced a stored artefact or a reproducible command.
   only as cited by Vioque et al. (2020). The publisher page blocked automated access and the arXiv
   search returned nothing. It is marked as such in the report.
 - **Counterexamples:** the fault indices are regenerated from the stored seed in the notebook and
-  asserted equal to the stored indices (`analysis.counterexamples`).
+  asserted equal to the stored indices (`analysis.counterexamples`). Every flipped source was an
+  injected one (0 flips among untouched rows), which is a sanity check against nondeterminism.
+- **End-to-end determinism:** the after run retrained all models with the same seeds. On unflagged
+  rows the probabilities match the baseline to ≤ 1.2e-7, with 0 class changes (`results/after/side_effects.json`).
+- **Harness regression:** after the C2 harness was extended for the guard, the baseline C2 suite was
+  rerun into a scratch directory. The verdicts were identical, with the same 636 altered IDs.
+- **Suspicious result investigated:** the after-run Bootgather PASS was traced to a crash caused by NaN
+  input (`results/after/rerun_log.md`), not to a fix.
+- **Notebook:** executed with `jupyter nbconvert --execute` in the fresh environment installed from
+  the lock file. 0 errors (`results/verification/clean_install.txt`).
+- **Summary:** the word count was computed with a regex over non-space tokens (248 words).
 
 ## Process deviations disclosed
 - **Pilot runs:** a 3-epoch smoke run on partial data was used to debug the harness before freezing
@@ -69,5 +83,5 @@ Each check produced a stored artefact or a reproducible command.
 1. Confirmed the Phase 0 route and the repo location by replying "continue".
 2. Requested quick mode ("no need to train so much … finish today").
 3. Confirmed the protocol thresholds and grid ("confirm") before the freeze.
-4. Chose the improvement (Phase 5): see below.
+4. Chose improvement A (Phase 5), replying "A, and go for next".
 5. Approves the final tag.

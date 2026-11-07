@@ -7,7 +7,7 @@
    - ΔRecall_PMS −8.9 pp [−17.8, −2.2].
    
    The other realistic cells pass. The F1-noise and F2/F3 flips stay below 5 %.
-2. **C2 falsified.** Seven cases are FAIL-silent:
+2. **C2 falsified.** Eight cases are FAIL-silent:
    - W3 = 99, G = −50, r−Hα = 50, Gvar < 0;
    - J/W4 columns swapped;
    - duplicate source ID;

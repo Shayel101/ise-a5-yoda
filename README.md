@@ -61,8 +61,11 @@ uv run python -m a5.side_effects
 uv run python scripts/make_notebook.py
 uv run jupyter nbconvert --to notebook --execute --inplace notebooks/a5_analysis.ipynb
 
-# 6. Report PDF (needs pandoc and a LaTeX engine, e.g. MacTeX or TeX Live)
-pandoc report/report.md -o report/report.pdf --pdf-engine=xelatex -V geometry:margin=2.2cm
+# 6. Report figures + PDF (pandoc 3.6.1 ships with the pinned dev dependency pypandoc-binary;
+#    needs a XeLaTeX install, e.g. MacTeX / TeX Live, and the font "Arial Unicode MS")
+uv run python scripts/make_figures.py
+cd report && $(uv run python -c "import pypandoc;print(pypandoc.get_pandoc_path())") report.md -o report.pdf \
+    --pdf-engine=xelatex -V mainfont="Arial Unicode MS" -V monofont="Menlo" && cd ..
 ```
 
 **Determinism.** Seeds are fixed per run (Python, NumPy, TensorFlow) and TF op determinism is on.
