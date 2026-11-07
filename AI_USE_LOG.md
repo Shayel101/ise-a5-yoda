@@ -68,6 +68,15 @@ Each check produced a stored artefact or a reproducible command.
   input (`results/after/rerun_log.md`), not to a fix.
 - **Notebook:** executed with `jupyter nbconvert --execute` in the fresh environment installed from
   the lock file. 0 errors (`results/verification/clean_install.txt`).
+- **Final double-check (student request):** see `results/verification/verification_report.md`.
+  - An independent full baseline rerun was bit-identical.
+  - `scripts/verify_claims.py` re-derived every quoted number without the analysis module: 74/74 pass.
+  - A fresh clone passes all tests.
+  - The notebook was re-executed with 0 errors.
+  - The check found and fixed 3 mis-rounded numbers (no verdict changed).
+  - It found a downloader defect: `-out.all` was ignored, so the candidate tables lack flag columns. No
+    result is affected, and the W3W4 shares are now recomputed from the sample table.
+  - It disclosed a post-freeze run-script change, which was shown to be harmless.
 - **Summary:** the word count was computed with a regex over non-space tokens (248 words).
 
 ## Process deviations disclosed

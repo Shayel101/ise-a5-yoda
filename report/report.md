@@ -148,9 +148,9 @@ All 57 evaluations completed on the first attempt (647 s, no crashes, no reruns)
 | Realistic cell | PMS flip [95 % CI] | CBe flip [95 % CI] | ΔRecall_PMS [95 % CI] | C1 |
 |---|---|---|---|---|
 | F1-resample 44 % | **10.5 %** [10.0, 11.0] | **9.5 %** [8.8, 10.2] | **−8.9 pp** [−17.8, −2.2] | **falsified** (both rules) |
-| F1-noise 44 % | 3.0 % [2.8, 3.3] | 4.7 % [4.2, 5.1] | −2.2 pp [−6.7, 0.0] | survives |
-| F2 2.3 % | 1.9 % [1.7, 2.1] | 1.9 % [1.6, 2.1] | −2.4 pp [−7.1, 0.0] | survives |
-| F3 1.3 % | 0.4 % [0.3, 0.4] | 0.3 % [0.1, 0.4] | 0.0 pp | survives |
+| F1-noise 44 % | 3.0 % [2.8, 3.3] | 4.7 % [4.2, 5.2] | −2.2 pp [−6.7, 0.0] | survives |
+| F2 2.3 % | 1.9 % [1.7, 2.1] | 1.9 % [1.6, 2.2] | −2.4 pp [−7.1, 0.0] | survives |
+| F3 1.3 % | 0.4 % [0.3, 0.4] | 0.2 % [0.1, 0.4] | 0.0 pp | survives |
 
 ![Flip rate of published candidates versus fault rate (solid: baseline; dashed: after the guard). Vertical dotted lines mark the paper-realistic rates; the horizontal line marks the 5 % threshold.](figures/flip_curves.png)
 

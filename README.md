@@ -40,7 +40,7 @@ Course: Intelligent Software Engineering, assignment ISE-A5. The full write-up i
 
 **Negative results**, where the claim held:
 - AllWISE mismatches at 2.3 % flip only 1.9 % of candidates.
-- IPHAS/VPHAS+ mismatches at 1.3 % flip only 0.3–0.4 %.
+- IPHAS/VPHAS+ mismatches at 1.3 % flip only 0.2–0.4 %.
 - Gaussian W3/W4 noise at 44 % stays below 5 % in the baseline.
 
 **Improvement A** (an input-validation and ID-integrity guard) fixed the C2 failures. It did not fix
@@ -72,6 +72,7 @@ still counts as flips.
 ### Common requirements
 | Requirement | How it is met |
 |---|---|
+| Verified end to end | [`results/verification/verification_report.md`](results/verification/verification_report.md): bit-identical independent rerun; 74/74 quoted numbers re-derived by [`scripts/verify_claims.py`](scripts/verify_claims.py); fresh-clone tests; defects found and handled |
 | Executable top to bottom | The notebook passes `jupyter nbconvert --execute` with 0 errors in a fresh environment installed from `uv.lock` ([`results/verification/clean_install.txt`](results/verification/clean_install.txt)) |
 | Frozen seeds, dependencies, data version, environment | Seeds 11/22/33 with TF op determinism (the after run reproduced the baseline models to ≤ 1.2e-7); `uv.lock`; VizieR checksums for 211 files; SIMBAD label hash |
 | Retain failed runs, negative results, challenging evidence | `failures/` directories; [`results/pilot_smoke/`](results/pilot_smoke/) (pre-freeze debug run, disclosed); rerun logs; the nominal Bootgather PASS reported as such |
@@ -149,9 +150,9 @@ All figures are generated from raw results by
 | Realistic cell | PMS flip [95 % CI] | CBe flip [95 % CI] | ΔRecall PMS [95 % CI] | C1 baseline | C1 after |
 |---|---|---|---|---|---|
 | F1-resample 44 % | **10.5 %** [10.0, 11.0] | **9.5 %** [8.8, 10.2] | **−8.9 pp** [−17.8, −2.2] | ❌ falsified | ❌ (13.4 % / 13.1 %) |
-| F1-noise 44 % | 3.0 % [2.8, 3.3] | 4.7 % [4.2, 5.1] | −2.2 pp [−6.7, 0.0] | ✅ survives | ❌ CBe 5.6 % (CI-lo 5.0 %) |
-| F2 AllWISE 2.3 % | 1.9 % [1.7, 2.1] | 1.9 % [1.6, 2.1] | −2.4 pp [−7.1, 0.0] | ✅ survives | ✅ survives |
-| F3 IPHAS 1.3 % | 0.4 % [0.3, 0.4] | 0.3 % [0.1, 0.4] | 0.0 pp | ✅ survives | ✅ survives |
+| F1-noise 44 % | 3.0 % [2.8, 3.3] | 4.7 % [4.2, 5.2] | −2.2 pp [−6.7, 0.0] | ✅ survives | ❌ CBe 5.6 % (CI-lo 5.0 %) |
+| F2 AllWISE 2.3 % | 1.9 % [1.7, 2.1] | 1.9 % [1.6, 2.2] | −2.4 pp [−7.1, 0.0] | ✅ survives | ✅ survives |
+| F3 IPHAS 1.3 % | 0.4 % [0.3, 0.4] | 0.2 % [0.1, 0.4] | 0.0 pp | ✅ survives | ✅ survives |
 
 Full per-cell tables: [`report/tables/cells_baseline.csv`](report/tables/cells_baseline.csv),
 [`cells_after.csv`](report/tables/cells_after.csv).
@@ -256,6 +257,8 @@ for PMS and 0.39 for CBe. Training curves for each seed:
 - **Synthetic faults.** These are not real mismatched photometry; the F1-noise σ is assumed.
 - **Data vintage.** Gaia DR2-era data; SIMBAD is a live database (queried 2026-11-07).
 - **Precision is only a lower limit** (paper Appx. B.1).
+- **Downloader defect.** `data/raw/{pms,cbe,either}.tsv` lack VizieR's flag columns because
+  `-out.all` was ignored. Only their IDs are used, so no result is affected (see the verification report).
 - **Protocol design error.** One ill-posed agreement oracle (Jaccard on E_rand) was recomputed on the
   full table and logged. No decision depends on it.
 
@@ -279,8 +282,9 @@ for i in 0 1 2 3 4 5; do uv run python scripts/download_data.py --shard $i --nsh
 uv run python scripts/download_data.py --verify
 uv run python scripts/build_labels.py   # SIMBAD is a live DB; --verify reports whether it still matches the frozen hash
 
-# 3. Tests (45)
+# 3. Tests (45) and claim verification (74 checks against the raw results)
 uv run pytest -q
+uv run python scripts/verify_claims.py   # run after step 4
 
 # 4. Experiments: about 10 min each on the machine above
 uv run python -m a5.run_experiment configs/baseline.yaml

@@ -50,7 +50,10 @@ SAMPLE_COLS = [
     "ccf", "ex", "var", "qph", "FW3W4", "a10p", "Dist1", "Dist2",
     "IVPHAS", "AllWISE", "RUWE", "e_FG", "e_FBP", "e_FRP", "E(BR/RP)",
 ]
-SMALL_TABLES = ["pms", "cbe", "either"]  # all columns
+# NOTE (found in final verification): VizieR ignored the empty-valued "-out.all" below, so these
+# three files contain only the default columns. Only their Gaia IDs are used. This is kept as is so
+# the frozen checksums remain valid (results/verification/verification_report.md).
+SMALL_TABLES = ["pms", "cbe", "either"]
 
 
 def log(event: dict) -> None:
