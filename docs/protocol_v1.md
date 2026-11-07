@@ -1,5 +1,10 @@
 # Protocol v1 (frozen before any fault injection)
 
+Thresholds and grid confirmed by the student on 2026-11-07 ("confirm"). Frozen at tag
+`a5-protocol-frozen`. Its SHA256 is in `results/protocol_hash.txt`. Data checksums are recorded in
+`data/checksums.json` when the download completes, before the baseline run. That file is generated
+by `scripts/download_data.py --record` and is not part of this document.
+
 ## 1. Baseline and environment
 - Baseline code: this repository at tag `a5-env` plus the files added by the protocol commit. The run
   scripts are committed with the protocol and are not changed afterwards, except for bug fixes, which
