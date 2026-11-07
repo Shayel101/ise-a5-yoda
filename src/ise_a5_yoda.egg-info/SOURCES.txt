@@ -1,0 +1,7 @@
+pyproject.toml
+src/a5/__init__.py
+src/ise_a5_yoda.egg-info/PKG-INFO
+src/ise_a5_yoda.egg-info/SOURCES.txt
+src/ise_a5_yoda.egg-info/dependency_links.txt
+src/ise_a5_yoda.egg-info/requires.txt
+src/ise_a5_yoda.egg-info/top_level.txt

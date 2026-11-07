@@ -1,0 +1,12 @@
+# Deliberate-break check 2026-11-07T04:20:25Z
+# Breaks: (1) F1_noise writes into its input (no copy); (2) swap donor may equal the row itself
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[0.013-F1_noise-kw1-cols1]
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[0.023-F1_noise-kw1-cols1]
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[0.1-F1_noise-kw1-cols1]
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[0.44-F1_noise-kw1-cols1]
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[0.44-F2_allwise_swap-kw2-cols2]
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[0.44-F3_iphas_swap-kw3-cols3]
+FAILED tests/test_faults_oracles.py::test_exact_rate_and_only_target_columns[1.0-F1_noise-kw1-cols1]
+FAILED tests/test_faults_oracles.py::test_determinism_and_no_mutation[F1_noise-kw1-cols1]
+FAILED tests/test_faults_oracles.py::test_swap_never_self_donor - assert False
+9 failed, 32 passed in 0.35s

@@ -1,0 +1,1 @@
+clean install from uv.lock (uv sync --frozen into fresh venv) 2026-11-07T04:25:18Z: 41 passed; tensorflow 2.16.2 imports

@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: ise-a5-yoda
+Version: 0.1.0
+Summary: ISE-A5: falsification study of fault-tolerance claims of the YODA ANN (Vioque et al. 2020)
+Requires-Python: ==3.12.*
+Requires-Dist: tensorflow==2.16.2
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pandas==2.2.3
+Requires-Dist: pyarrow==18.1.0
+Requires-Dist: scikit-learn==1.5.2
+Requires-Dist: scipy==1.14.1
+Requires-Dist: matplotlib==3.9.3
+Requires-Dist: pyyaml==6.0.2
+Requires-Dist: astroquery==0.4.7
+Requires-Dist: astropy==6.1.7

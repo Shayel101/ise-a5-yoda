@@ -1,0 +1,9 @@
+data/raw/
+data/external/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+results/**/models/
+*.egg-info/

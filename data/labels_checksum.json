@@ -1,0 +1,8 @@
+{
+ "source": "https://simbad.cfa.harvard.edu/simbad/sim-tap/sync",
+ "query": "SELECT b.main_id, b.otype, i.id FROM basic AS b JOIN ident AS i ON i.oidref = b.oid WHERE b.otype IN ('Ae*', 'TT*', 'Be*') AND i.id LIKE 'Gaia DR2 %'",
+ "retrieved_utc": "2026-11-07T04:09:11+00:00",
+ "rows": 7957,
+ "sha256": "ffe875e73f850ec4aa68f9d555f9b70c17bdd78f012919ae63fbb4115fd38d8c",
+ "note": "SIMBAD is a live database; a re-query may legitimately differ (see README)."
+}
