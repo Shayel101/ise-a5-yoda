@@ -61,6 +61,16 @@ def test_swap_never_self_donor():
         assert np.all(out[:, F.RHA] != x[:, F.RHA])
 
 
+def test_swap_with_external_donors():
+    x = toy(200)
+    donors = np.full((50, 13), -99.0)
+    before = donors.copy()
+    out, idx = F.f2_allwise_swap(x, 0.1, seed=4, donors=donors)
+    assert len(idx) == 20
+    assert np.all(out[np.ix_(idx, F.ALLWISE)] == -99.0)
+    assert np.array_equal(donors, before)
+
+
 def test_f4_scales_variability_exactly():
     x = toy()
     out, idx = F.f4_inflate_flux_errors(x, 0.1, seed=0, k=2.0)

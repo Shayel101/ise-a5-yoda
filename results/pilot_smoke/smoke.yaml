@@ -1,0 +1,17 @@
+name: smoke
+out_dir: /private/tmp/claude-501/-Users-sha-Desktop-lightkurve-ui/a725898b-cafc-4fe5-aa8e-03a3368a785d/scratchpad/smoke/out
+guard: false
+model_seeds: [11]
+n_other: 3000
+max_epochs: 3
+patience: 50
+n_rand: 3000
+n_boot: 50
+w34_noise_sigma: 1.0
+cells:
+  - {fault: clean, rate: 0.0}
+  - {fault: F1_resample, rate: 0.44}
+  - {fault: F2_allwise_swap, rate: 0.023}
+  - {fault: F3_iphas_swap, rate: 0.013}
+  - {fault: F4_fluxerr, rate: 0.10, k: 5.0}
+  - {fault: F1_noise, rate: 0.44}

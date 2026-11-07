@@ -52,14 +52,24 @@ def f1_w3w4_noise(x: np.ndarray, rate: float, seed: int, sigma: float) -> tuple[
     return out, idx
 
 
-def _swap(x: np.ndarray, rate: float, seed: int, cols: list[int]) -> tuple[np.ndarray, np.ndarray]:
-    """Give each corrupted row the ``cols`` values of a different, randomly chosen donor row
-    (donors drawn from the clean input, so a donor's own corruption cannot chain)."""
+def _swap(x: np.ndarray, rate: float, seed: int, cols: list[int],
+          donors: np.ndarray | None = None) -> tuple[np.ndarray, np.ndarray]:
+    """Give each corrupted row the ``cols`` values of a randomly chosen donor row.
+
+    ``donors`` (an (m, 13) clean array, e.g. random Sample-of-Study sources) is the population a wrong
+    cross-match would draw from. If None, donors are other rows of the clean input itself (never the
+    row itself). Donors always come from clean data, so corruptions cannot chain.
+    """
     rng = np.random.default_rng(seed)
     src = np.asarray(x, dtype=float)
     out = np.array(src, copy=True)
     n = len(out)
     idx = _pick(rng, n, rate)
+    if donors is not None:
+        d = np.asarray(donors, dtype=float)
+        pick = rng.integers(0, len(d), size=len(idx))
+        out[np.ix_(idx, cols)] = d[np.ix_(pick, cols)]
+        return out, idx
     if n < 2:
         return out, idx
     donor = rng.integers(0, n - 1, size=len(idx))
@@ -68,15 +78,17 @@ def _swap(x: np.ndarray, rate: float, seed: int, cols: list[int]) -> tuple[np.nd
     return out, idx
 
 
-def f2_allwise_swap(x: np.ndarray, rate: float, seed: int) -> tuple[np.ndarray, np.ndarray]:
+def f2_allwise_swap(x: np.ndarray, rate: float, seed: int,
+                    donors: np.ndarray | None = None) -> tuple[np.ndarray, np.ndarray]:
     """F2: wrong AllWISE cross-match -> J, H, Ks, W1..W4 of another source."""
-    return _swap(x, rate, seed, ALLWISE)
+    return _swap(x, rate, seed, ALLWISE, donors)
 
 
-def f3_iphas_swap(x: np.ndarray, rate: float, seed: int) -> tuple[np.ndarray, np.ndarray]:
+def f3_iphas_swap(x: np.ndarray, rate: float, seed: int,
+                  donors: np.ndarray | None = None) -> tuple[np.ndarray, np.ndarray]:
     """F3: wrong IPHAS/VPHAS+ cross-match -> r and H-alpha of another source. YODA only uses r-Halpha
     (the 'rHa' column), so swapping (r, Halpha) together is equivalent to swapping rHa."""
-    return _swap(x, rate, seed, [RHA])
+    return _swap(x, rate, seed, [RHA], donors)
 
 
 def f4_inflate_flux_errors(x: np.ndarray, rate: float, seed: int, k: float) -> tuple[np.ndarray, np.ndarray]:
